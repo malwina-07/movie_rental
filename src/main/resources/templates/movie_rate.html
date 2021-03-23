@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Rate the movie</title>
+</head>
+<body>
+<div class="col container" style="text-align: center">
+    <div> Welcome user: <h6 sec:authorize="isAuthenticated()"><span sec:authentication="name"/></h6>
+        in Movie Rental App !
+        <div>
+            <div sec:authorize="isAuthenticated()" class="btn btn-outline-success">
+                <a th:href="@{/logout}">Sign Out</a>
+            </div>
+            <div sec:authorize="isAuthenticated()" class="btn btn-outline-success">
+                <a th:href="@{/my_account}">My Account</a>
+            </div>
+            <div sec:authorize="isAuthenticated()" class="btn btn-outline-success">
+                <a th:href="@{/movie/cart}">Cart</a>
+            </div>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <a th:href="@{admin/add_movie}">Add Movie To Catalogue</a>
+            </div>
+        </div>
+    </div>
+</div>
+<h2 style="text-align: center">Rate the movie! </h2>
+<div>
+    <!--    wyświetl tytuł filmu-->
+    <h1>Movie:
+        <td th:text="${movie.title}"></td>
+    </h1>
+</div>
+<div class="alert alert-danger" role="alert">
+    Please rate the movie if you watched. Thank you.
+</div>
+<form method="post" th:action="@{/movie/rate/save}" th:object="${rates}">
+    <table>
+        <tbody>
+        <tr>
+            <td th:text="Score"></td>
+            <td>
+                <input type="text" th:field="*{score}">
+            </td>
+            <td th:if="${ #fields.hasErrors('score') }" th:errors="*{score}"></td>
+        </tr>
+
+        <tr>
+            <td th:text="Comment"></td>
+            <td>
+                <input type="text" th:field="*{comment}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">Save changes</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+
+<div>
+    <a th:href="@{/movie/catalogue}" class="btn btn-outline-success">Back</a>
+</div>
+
+</body>
+</html>
