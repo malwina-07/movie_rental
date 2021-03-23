@@ -84,6 +84,12 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(userId).orElse(null);
     }
 
+    @Override
+    public void update(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+    }
+
     private void encodePassword(User userEntity, UserData userData) {
         userEntity.setPassword(passwordEncoder.encode(userData.getPassword()));
     }
