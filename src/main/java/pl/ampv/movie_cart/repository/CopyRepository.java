@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pl.ampv.movie_cart.model.Copy;
 
+import java.util.List;
+
 
 @Repository
 public interface CopyRepository extends JpaRepository<Copy,Long> {

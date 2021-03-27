@@ -33,7 +33,7 @@ fill those field with new data:
         <tr>
             <td>
                 <label>Last name:
-                    <input type="text" th:field="*{lastName}">
+                    <input type="text" th:field="*{lastName}" >
                 </label>
             </td>
             <td th:if="${ #fields.hasErrors('lastName') }" th:errors="*{lastName}"></td>
@@ -42,15 +42,15 @@ fill those field with new data:
         <tr>
             <td>
                 <label>E-Mail:
-                    <input type="text" th:field="*{email}">
+                    <input type="text" th:field="*{email}" required>
                 </label>
             </td>
-            <td th:if="${ #fields.hasErrors('email') }" th:errors="*{email}"></td>
+            <td th:if="${ #fields.hasErrors('email') }" th:errors="*{email}" ></td>
         </tr>
         <tr>
             <td>
                 <label>Password
-                    <input type="password" th:field="*{password}">
+                    <input type="password" th:field="*{password}" required>
                 </label>
             </td>
             <td th:if="${ #fields.hasErrors('password') }" th:errors="*{password}"></td>

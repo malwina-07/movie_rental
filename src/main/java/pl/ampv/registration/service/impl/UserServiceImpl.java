@@ -86,6 +86,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void update(User user) {
+        User preUpdate = userRepository.getOne(user.getId());
+        user.setRoles(preUpdate.getRoles());
+        user.setReview(preUpdate.getReview()); //przekazuje pola ktore nie ulegają zmianie
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }

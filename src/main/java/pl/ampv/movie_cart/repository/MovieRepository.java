@@ -11,14 +11,12 @@ import java.util.Optional;
 
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
-    @Query(value = "select * from Movie m where m.title like %:keyword% or m.premiere like %:keyword%", nativeQuery = true)
+    @Query(value = "select * from Movie m where m.title like %:keyword% or m.premiere like %:keyword% or m.genre like %:keyword%", nativeQuery = true)
     List<Movie> findByKeyword(@Param("keyword") String keyword);
 
 //    @Query(value = "select * from Movie m where m.genre =:genre")
 //    List<Movie> findByGenre(String genre);
-
-// no need anymore
-//    List<Movie> findByScoreGreaterThan(String avgScore);
+//List<Movie> findTop10ByScoreOrderByScoreDesc();
 
     Optional<Movie> findByTitle(String title);
 }

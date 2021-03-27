@@ -58,13 +58,6 @@ public class MovieServiceImpl implements MovieService {
         return movieRepository.findByKeyword(keyword);
     }
 
-// no need anymore
-//    @Override
-//    public List<Movie> getBestScoreMovie() {
-//
-//        return movieRepository.findByScoreGreaterThan(bestScore);
-//    }
-
     @Override
     public void save(Movie movie) {
         try {
@@ -72,6 +65,11 @@ public class MovieServiceImpl implements MovieService {
         } catch (MovieAlreadyExistsInCatalogueException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void delete(Long movieId) {
+        movieRepository.deleteById(movieId);
     }
 
     // from another method

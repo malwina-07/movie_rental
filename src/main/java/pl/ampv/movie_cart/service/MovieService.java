@@ -17,9 +17,8 @@ public interface MovieService {
     List<Movie> getAllSortedByPremiere();
 
     List<Movie> findByKeyword(String keyword);
-//
-//    List<Movie> getBestScoreMovie();
 
     void save(Movie movie);
 
+    void delete(Long movieId);
 }

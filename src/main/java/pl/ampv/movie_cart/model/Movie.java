@@ -32,9 +32,10 @@ public class Movie {
     private String description;
 
     @Column(name = "score")
-    private String score;
+    private Double score;
 
     @Column(name = "genre")
+    @Enumerated(EnumType.STRING)
     private Genre genre;
 
     @OneToMany(mappedBy = "movie",

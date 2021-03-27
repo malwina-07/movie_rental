@@ -22,10 +22,22 @@
     </div>
 </div>
 <div align="center"><h1>Add Movie</h1></div>
-
-<div>
-    <a th:href="@{/logout}">Logout</a>
-</div>
+<br>
+<br>
+List of Genre:
+DRAMA,
+COMEDY,
+HORROR,
+FANTASY,
+THRILLER,
+CRIME,
+MUSICAL,
+BIOGRAPHICAL,
+ACTION,
+ANIMATION,
+SCIENCE_FICTION,
+ADVENTURE
+<br>
 
 <form method="post" th:action="@{/admin/save}" th:object="${movie}">
     <table>
@@ -61,7 +73,7 @@
         <tr>
             <td th:text="Score"></td>
             <td>
-                <input type="text" th:field="*{score}">
+                <input type="number" th:field="*{score}" min="1" max="10">
             </td>
             <td th:if="${ #fields.hasErrors('score') }" th:errors="*{score}"></td>
         </tr>
@@ -75,7 +87,7 @@
         </tr>
         <tr>
             <td>
-                <button type="submit">Save changes</button>
+                <button type="submit" class="btn btn-success">Save changes</button>
             </td>
         </tr>
         </tbody>

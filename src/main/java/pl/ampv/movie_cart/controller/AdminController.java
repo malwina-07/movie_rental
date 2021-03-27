@@ -4,10 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.ampv.movie_cart.model.Movie;
 import pl.ampv.movie_cart.service.MovieService;
 
@@ -37,7 +34,14 @@ public class AdminController {
             return "add_movie";
         }
         movieService.save(movie);
-        log.info("Added movie to catalogue: "+ movie);
+        log.info("Added movie to catalogue: " + movie);
+        return "redirect:/movie/catalogue";
+    }
+
+    @GetMapping("/delete/{movieId}")
+    public String deleteMovie(@PathVariable Long movieId) {
+        movieService.delete(movieId);
+
         return "redirect:/movie/catalogue";
     }
 

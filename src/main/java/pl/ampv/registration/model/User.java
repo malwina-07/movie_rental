@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import pl.ampv.movie_cart.model.Review;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -24,9 +25,11 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotEmpty(message = "First name can not be empty")
     @Column(name = "first_name")
     private String firstName;
+
     @NotEmpty(message = "Last name can not be empty")
     @Column(name = "last_name")
     private String lastName;
@@ -46,6 +49,9 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
+
+    @OneToMany(mappedBy = "user")
+    private List<Review> review;
 
 
     @Override

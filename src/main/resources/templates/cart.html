@@ -30,14 +30,14 @@
 
 <table class="table table-striped">    <thead>
     <tr>
-        <th scope="col">Tile</th>
+        <th scope="col">Title</th>
         <th scope="col">Amount</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="movie : ${movies}">
-        <td scope="row" th:text="${movie.key}"></td>
-        <td th:text="${movie.value}"></td>
+    <tr th:each="cartEntry : ${cartEntries}">
+        <td scope="row" th:text="${cartEntry.key.title}"></td>
+        <td th:text="${cartEntry.value}"></td>
     </tr>
     </tbody>
 </table>

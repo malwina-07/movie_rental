@@ -24,6 +24,27 @@
 <!--ostatnio kupine filmy-->
 
 <!--lista review-->
+Your reviews
+<br>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Movie</th>
+            <th scope="col">Score </th>
+            <th scope="col">Comment</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="review: ${reviews}">
+            <td th:text="${review.movie.getTitle()}"></td>
+            <td th:text="${review.score}"></td>
+            <td th:text="${review.comment}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<br>
 
 <!--rabat-->
 
@@ -49,5 +70,6 @@
         </tbody>
     </table>
 </div>
+
 </body>
 </html>

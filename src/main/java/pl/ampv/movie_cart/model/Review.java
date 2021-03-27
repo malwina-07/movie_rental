@@ -22,13 +22,12 @@ public class Review {
     @JoinColumn(name = "fk_movie")
     private Movie movie;
 
-    @Size(min = 1, max = 10, message = "Score form 1 to 10")
-    private String score;
+    private Double score;
 
     private String comment;
 
     @ManyToOne
-    @JoinColumn(name = "fk_review")
+    @JoinColumn(name = "fk_user")
     private User user;
 
 

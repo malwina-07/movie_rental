@@ -7,8 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.ampv.movie_cart.model.Movie;
 import pl.ampv.movie_cart.repository.MovieRepository;
 import pl.ampv.movie_cart.usecase.port.CartService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Slf4j
@@ -18,6 +22,8 @@ import pl.ampv.movie_cart.usecase.port.CartService;
 public class CartController {
 
     private final CartService cartService;
+    private final MovieRepository movieRepository;
+
 
     @GetMapping("/cart/add/{movieId}")
     public String addMovieToCart(@PathVariable Long movieId, Model model){
@@ -28,7 +34,14 @@ public class CartController {
 
     @GetMapping("/cart")
     public String showCart(Model model){
-        model.addAttribute("movies", cartService.getCartEntries());
+        Map<Movie,Integer> cartEntries = new HashMap<>();
+        for(Map.Entry<Long, Integer> cartEntry : cartService.getCartEntries().entrySet()){
+            cartEntries.put(movieRepository.getOne(cartEntry.getKey()),cartEntry.getValue());
+        }
+
+        model.addAttribute("cartEntries", cartEntries);
+
+
         return "cart";
     }
 
