@@ -37,6 +37,9 @@ public class Movie {
     @Column(name = "genre")
     @Enumerated(EnumType.STRING)
     private Genre genre;
+//
+//    @Enumerated(EnumType.STRING)
+//    private PriceType price;
 
     @OneToMany(mappedBy = "movie",
             orphanRemoval = true,

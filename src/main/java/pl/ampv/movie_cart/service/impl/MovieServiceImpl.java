@@ -21,7 +21,6 @@ public class MovieServiceImpl implements MovieService {
     private final MovieRepository movieRepository;
     private final AddMovieToCatalogue catalogue;
 
-//    final String bestScore = "7.0";
 
     @Override
     public List<Movie> getAll() {

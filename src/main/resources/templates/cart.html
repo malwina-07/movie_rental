@@ -28,7 +28,8 @@
     Continue shopping: <a th:href="@{/movie/catalogue}" class="btn btn-outline-success">Back</a>
 </div>
 
-<table class="table table-striped">    <thead>
+<table class="table table-striped">
+    <thead>
     <tr>
         <th scope="col">Title</th>
         <th scope="col">Amount</th>
@@ -40,8 +41,13 @@
         <td th:text="${cartEntry.value}"></td>
     </tr>
     </tbody>
+    <input type="hidden" th:field="${order.orderId}">
+
 </table>
 
+<form method="POST" th:action="@{/movie/order/}">
+    <button type="submit" name="submit" value="value" class="link-button">Złóż zamówienie</button>
+</form>
 
 </body>
 </html>

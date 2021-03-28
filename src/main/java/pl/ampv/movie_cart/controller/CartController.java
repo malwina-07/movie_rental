@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.ampv.movie_cart.model.Movie;
+import pl.ampv.movie_cart.model.Order;
 import pl.ampv.movie_cart.repository.MovieRepository;
 import pl.ampv.movie_cart.usecase.port.CartService;
 
@@ -34,6 +35,9 @@ public class CartController {
 
     @GetMapping("/cart")
     public String showCart(Model model){
+
+        model.addAttribute("order", new Order());
+
         Map<Movie,Integer> cartEntries = new HashMap<>();
         for(Map.Entry<Long, Integer> cartEntry : cartService.getCartEntries().entrySet()){
             cartEntries.put(movieRepository.getOne(cartEntry.getKey()),cartEntry.getValue());
@@ -41,48 +45,7 @@ public class CartController {
 
         model.addAttribute("cartEntries", cartEntries);
 
-
         return "cart";
     }
-
-//    @PostMapping("/cart")
-//    public String showMovieInCart(Model model){
-//        model.addAttribute("movies", cartService.getCartEntries());
-//        return "cart";
-//    }
-
-//    @ModelAttribute("movies")
-//    public Map<Long,Integer> movies(){
-//        Map<Long, Integer> cartEntries = cartService.getCartEntries();
-//
-//        movieRepository.findById(cartEntries.get());
-//    }
-
-
-
-
-
-//
-//    @GetMapping("/cart")
-//    public String viewCardPage(){
-//        cartService.getCartEntries();
-//        return "cart";
-//    }
-//
-//    @GetMapping("/add/{movieId}")
-//    public String addMovieToCard(@PathVariable Long movieId, Model model) throws MovieDoesNotExistInCatalogue {
-//        model.addAttribute("movie", movieService.getById(movieId));
-//        cartService.add(movieId);
-//        movieService.deleteCopyFromMovieById(movieId);
-//        return "cart";
-//    }
-//
-//    @PostMapping("/cart")
-//    public String viewCard(Model model){
-//        model.addAttribute("cart", cartService.getCartEntries());
-//        return "cart";
-//    }
-
-
 
 }
