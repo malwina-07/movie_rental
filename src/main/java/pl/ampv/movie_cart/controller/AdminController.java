@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import pl.ampv.movie_cart.model.Movie;
 import pl.ampv.movie_cart.service.MovieService;
 
-
 import javax.validation.Valid;
 
 @Slf4j

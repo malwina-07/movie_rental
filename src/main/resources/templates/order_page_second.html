@@ -8,28 +8,32 @@
 </head>
 <body>
 <h4 style="text-align: center">Yours order</h4>
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Email</th>
-        <th scope="col">First name</th>
-        <th scope="col">Last name</th>
-        <th scope="col">Amount</th>
-        <th scope="col">From</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td th:text="${order.orderId}"></td>
-        <td th:text="${order.user.email}"></td>
-        <td th:text="${order.user.firstName}"></td>
-        <td th:text="${order.user.lastName}"></td>
-        <td th:text="${order.copies.size()}"></td>
-        <td th:text="${order.getRentedDate()}"></td>
-    </tr>
-    </tbody>
-    <a th:href="@{/movie/order/accept}" class="btn btn-success">ORDER</a>
-</table>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Email</th>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Amount</th>
+            <th scope="col">From</th>
+            <th scope="col">Total price for 1 day</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${order.orderId}"></td>
+            <td th:text="${order.user.email}"></td>
+            <td th:text="${order.user.firstName}"></td>
+            <td th:text="${order.user.lastName}"></td>
+            <td th:text="${order.copies.size()}"></td>
+            <td th:text="${order.getRentedDate()}"></td>
+            <td th:text="${order.totalPrice}"></td>
+        </tr>
+        </tbody>
+        <a th:href="@{/movie/order/accept}" class="btn btn-success">Accept the order</a>
+    </table>
+</div>
 </body>
 </html>

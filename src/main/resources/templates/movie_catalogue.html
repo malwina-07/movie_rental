@@ -28,27 +28,27 @@
     </div>
 </div>
 
-<div  class="col container" style="text-align: center" >
+<div class="col container" style="text-align: center">
     <h1> Welcome to Movie Rental Catalogue!</h1>
 </div>
-<div>See the 10 Best Movies Of All Time...  <a th:href="@{/home}"> TOP10 </a></div>
-<div class="btn-group">
-    Sort by:
-    <ul>
-        <li><a th:href="@{/movie/sortBy/titleAsc}">Title A-Z</a></li>
-        <li><a th:href="@{/movie/sortBy/titleDesc}">Title Z-A</a></li>
-        <li><a th:href="@{/movie/sortBy/score}">Avg customer Review</a></li>
-        <li><a th:href="@{/movie/sortBy/premiere}">Newest Movies</a></li>
-    </ul>
-</div>
-<form method="get" th:action="@{/movie/catalogue}">
-    Find movie:
-    <input id="txtSearch" type="text" name="keyword" required/>
-    <input type="submit" class="btn btn-success btn-sm" value="Search"/>
-    <input type="button" class="btn btn-success btn-sm" value="Clear" onclick="clearFilter()"/>
-</form>
-<div>
-
+<div class="container">
+    <div>See the 10 Best Movies Of All Time... <a th:href="@{/home}"> TOP10 </a></div>
+    <div class="btn-group">
+        Sort by:
+        <ul>
+            <li><a th:href="@{/movie/sortBy/titleAsc}">Title A-Z</a></li>
+            <li><a th:href="@{/movie/sortBy/titleDesc}">Title Z-A</a></li>
+            <li><a th:href="@{/movie/sortBy/score}">Avg customer Review</a></li>
+            <li><a th:href="@{/movie/sortBy/premiere}">Newest Movies</a></li>
+        </ul>
+    </div>
+    <form method="get" th:action="@{/movie/catalogue}">
+        Find movie:
+        <input id="txtSearch" type="text" name="keyword" required/>
+        <input type="submit" class="btn btn-success btn-sm" value="Search"/>
+        <input type="button" class="btn btn-success btn-sm" value="Clear" onclick="clearFilter()"/>
+    </form>
+    <div>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -61,7 +61,7 @@
             </thead>
             <tbody>
             <tr th:each="movie: ${movies}">
-                <td  scope="row" th:text="${movie.title}"></td>
+                <td scope="row" th:text="${movie.title}"></td>
                 <td th:text="${movie.premiere}"></td>
                 <td th:text="${movie.score}"></td>
                 <td th:text="${movie.genre}"></td>
@@ -70,20 +70,22 @@
                     <a th:href="@{/movie/cart/add/{movieId}(movieId=${movie.movieId})}" class="btn btn-outline-success"
                        onclick="return confirm('Do you want to add the move to cart?')">Buy</a>
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
-                        <a th:href="@{admin/movie/add_copy/{movieId}(movieId=${movie.movieId})}" class="btn btn-outline-success">Add Copy</a></div>
+                        <a th:href="@{admin/movie/add_copy/{movieId}(movieId=${movie.movieId})}"
+                           class="btn btn-outline-success">Add Copy</a></div>
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
-                        <a th:href="@{/admin/delete/{movieId}(movieId=${movie.movieId})}" class="btn btn-outline-success">Delete</a></div>
+                        <a th:href="@{/admin/delete/{movieId}(movieId=${movie.movieId})}"
+                           class="btn btn-outline-success">Delete</a></div>
                 </td>
             </tr>
             </tbody>
         </table>
-
+    </div>
 </div>
-
 <script type="text/javascript">
     function clearFilter() {
         window.location = '/movie/catalogue';
     }
 </script>
+
 </body>
 </html>

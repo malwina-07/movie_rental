@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
@@ -24,30 +24,32 @@
         </div>
     </div>
 </div>
-<h3>Your cart: </h3> <div style="text-align: right">
-    Continue shopping: <a th:href="@{/movie/catalogue}" class="btn btn-outline-success">Back</a>
+<div class="container">
+    <h3>Your cart: </h3>
+    <div style="text-align: right">
+        Continue shopping: <a th:href="@{/movie/catalogue}" class="btn btn-outline-success">Back</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cartEntry : ${cartEntries}">
+            <td scope="row" th:text="${cartEntry.key.title}"></td>
+            <td th:text="${cartEntry.value}"></td>
+        </tr>
+        </tbody>
+        <input type="hidden" th:field="${order.orderId}">
+
+    </table>
+
+    <form method="POST" th:action="@{/movie/order/}">
+        <button type="submit" name="submit" value="value" class="btn btn-success">Order</button>
+    </form>
 </div>
-
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th scope="col">Title</th>
-        <th scope="col">Amount</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="cartEntry : ${cartEntries}">
-        <td scope="row" th:text="${cartEntry.key.title}"></td>
-        <td th:text="${cartEntry.value}"></td>
-    </tr>
-    </tbody>
-    <input type="hidden" th:field="${order.orderId}">
-
-</table>
-
-<form method="POST" th:action="@{/movie/order/}">
-    <button type="submit" name="submit" value="value" class="link-button">Złóż zamówienie</button>
-</form>
-
 </body>
 </html>

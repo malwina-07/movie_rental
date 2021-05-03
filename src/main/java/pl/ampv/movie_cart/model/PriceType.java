@@ -1,12 +1,10 @@
 package pl.ampv.movie_cart.model;
 
 public enum PriceType {
-    PREMIERE(10.0*3),
-    NEWNESS(10.0*2),
-    STANDARD(10.0),
-    CLASSIC(10.0*0.5);
-
-//    private static final Double basePrice = 10.0;
+    PREMIERE(2.0 * 3),
+    NEWNESS(2.0 * 2),
+    STANDARD(2.0),
+    CLASSIC(2.0 * 0.5);
 
     private final Double dayPrice;
 

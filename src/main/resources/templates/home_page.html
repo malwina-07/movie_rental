@@ -54,29 +54,32 @@
         <p>Do you want to see more ? Go to <a th:href="@{/movie/catalogue}" class="btn btn-success">catalogue</a></p>
     </div>
 </div>
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th scope="col">Title</th>
-        <th scope="col">Premiere</th>
-        <th scope="col">Score</th>
-        <th scope="col">Genre</th>
-        <th scope="col">Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="movie: ${movies}">
-        <td scope="row" th:text="${movie.title}"></td>
-        <td th:text="${movie.premiere}"></td>
-        <td th:text="${movie.score}"></td>
-        <td th:text="${movie.genre}"></td>
-        <td>
-            <a th:href="@{/movie/details/{movieId}(movieId=${movie.movieId})}" class="btn btn-outline-success">Details</a>
-            <a th:href="@{/movie/cart/add/{movieId}(movieId=${movie.movieId})}" class="btn btn-outline-success" onclick="return confirm('Do you want to add the move to cart?')">Buy</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Premiere</th>
+            <th scope="col">Score</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="movie: ${movies}">
+            <td scope="row" th:text="${movie.title}"></td>
+            <td th:text="${movie.premiere}"></td>
+            <td th:text="${movie.score}"></td>
+            <td th:text="${movie.genre}"></td>
+            <td>
+                <a th:href="@{/movie/details/{movieId}(movieId=${movie.movieId})}" class="btn btn-outline-success">Details</a>
+                <a th:href="@{/movie/cart/add/{movieId}(movieId=${movie.movieId})}" class="btn btn-outline-success"
+                   onclick="return confirm('Do you want to add the move to cart?')">Buy</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

@@ -27,51 +27,71 @@
         </div>
     </div>
 </div>
-<div>
-    <!--    wyświetl tytuł filmu-->
-    <h1>Movie:
-        <td th:text="${movie.title}"></td>
-    </h1>
-</div>
-<!--dodac poster-->
-
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Title</th>
-        <th scope="col">Premiere</th>
-        <th scope="col">AvgScore</th>
-        <!--    liczba ocen-->
-        <th scope="col">Review</th>
-        <th scope="col">Genre</th>
-        <th scope="col">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td scope="row" th:text="${movie.movieId}"></td>
-        <td th:text="${movie.title}"></td>
-        <td th:text="${movie.premiere}"></td>
-        <td th:text="${movie.score}"></td>
-        <!--    liczba ocen-->
-        <td th:text="${movie.review.size()}"></td>
-        <td th:text="${movie.genre}"></td>
-        <td th:text="${movie.description}"></td>
-    </tr>
-    </tbody>
-</table>
-<div>
-    <!-- wyswietl dostepne kopie-->
-    <!--    cena filmu-->
+<div class="container">
     <div>
-        <a th:href="@{/movie/cart/add/{movieId}(movieId=${movie.movieId})}" class="btn btn-outline-success"
-           onclick="return confirm('Do you want to add the move to cart?')">Buy</a>
-
-        <a th:href="@{/movie/rate/{movieId}(movieId=${movie.movieId})}" class="btn btn-outline-success">Rate the movie</a>
-
-        <a th:href="@{/movie/catalogue}" class="btn btn-outline-success">Back to catalogue</a>
+        <h1>Movie:
+            <td th:text="${movie.title}"></td>
+        </h1>
     </div>
+    <!--dodac poster-->
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Premiere</th>
+            <th scope="col">AvgScore</th>
+            <th scope="col">Review</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td scope="row" th:text="${movie.movieId}"></td>
+            <td th:text="${movie.title}"></td>
+            <td th:text="${movie.premiere}"></td>
+            <td th:text="${movie.score}"></td>
+            <td th:text="${movie.review.size()}"></td>
+            <td th:text="${movie.genre}"></td>
+            <td th:text="${movie.description}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <!-- wyswietl dostepne kopie-->
+        <!--    cena filmu-->
+        <div>
+            <a th:href="@{/movie/cart/add/{movieId}(movieId=${movie.movieId})}" class="btn btn-outline-success"
+               onclick="return confirm('Do you want to add the move to cart?')">Buy</a>
+
+            <a th:href="@{/movie/rate/{movieId}(movieId=${movie.movieId})}" class="btn btn-outline-success">Rate the
+                movie</a>
+
+            <a th:href="@{/movie/catalogue}" class="btn btn-outline-success">Back to catalogue</a>
+        </div>
+    </div>
+
+    <div style align="center">
+        <h6>Reviews:</h6>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Comment</th>
+            <th scope="col">Score</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="review: ${reviews}">
+            <td th:text="${review.comment}"></td>
+            <td th:text="${review.score}"></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
+
 </body>
 </html>

@@ -28,44 +28,46 @@
     </div>
 </div>
 <h2 style="text-align: center">Rate the movie! </h2>
-<div>
-    <!--    wyświetl tytuł filmu-->
-    <h1>Movie:
-        <td th:text="${movie.title}"></td>
-    </h1>
-</div>
-<div class="alert alert-danger" role="alert">
-    Please rate the movie if you have watched. Thank you.
-</div>
-<form method="post" th:action="@{/movie/rate/save}" th:object="${rates}">
-    <table>
-        <tbody>
-        <tr>
-            <td th:text="Score"></td>
-            <td>
-                <input type="number" th:field="*{score}" min="1" max="10">
-            </td>
-            <td th:if="${ #fields.hasErrors('score') }" th:errors="*{score}"></td>
-        </tr>
+<div class="container">
+    <div>
 
-        <tr>
-            <td th:text="Comment"></td>
-            <td>
-                <input type="text" th:field="*{comment}">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button type="submit" class="btn btn-success">Save changes</button>
-            </td>
-        </tr>
-        <input type="hidden" th:field="${movie.movieId}">
-        </tbody>
-    </table>
-</form>
+        <h1>Movie:
+            <td th:text="${movie.title}"></td>
+        </h1>
+    </div>
+    <div class="alert alert-danger" role="alert">
+        Please rate the movie if you have watched. Thank you.
+    </div>
+    <form method="post" th:action="@{/movie/rate/save}" th:object="${rates}">
+        <table>
+            <tbody>
+            <tr>
+                <td th:text="Score"></td>
+                <td>
+                    <input type="number" th:field="*{score}" min="1" max="10">
+                </td>
+                <td th:if="${ #fields.hasErrors('score') }" th:errors="*{score}"></td>
+            </tr>
 
-<div>
-    <a th:href="@{/movie/catalogue}" class="btn btn-outline-success">Back</a>
+            <tr>
+                <td th:text="Comment"></td>
+                <td>
+                    <input type="text" th:field="*{comment}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit" class="btn btn-success">Save changes</button>
+                </td>
+            </tr>
+            <input type="hidden" th:field="${movie.movieId}">
+            </tbody>
+        </table>
+    </form>
+
+    <div>
+        <a th:href="@{/movie/catalogue}" class="btn btn-outline-success">Back</a>
+    </div>
 </div>
 
 </body>

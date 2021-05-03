@@ -22,16 +22,49 @@
     </div>
 </div>
 <!--ostatnio kupine filmy-->
-
-<!--lista review-->
-Your reviews
 <br>
 <div class="container">
+    <div style align="center">
+        <h6>Your orders</h6>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Nr.</th>
+            <th scope="col">Rented date</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Total price for 1 day</th>
+            <th scope="col">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order: ${orders}">
+            <td th:text="${order.orderId}"></td>
+            <td th:text="${order.rentedDate}"></td>
+            <td th:text="${order.copies.size()}"></td>
+            <td th:text="${order.totalPrice}"></td>
+            <td th:text="${order.status.name()}"></td>
+            <td>
+                <a th:href="@{/user/order/{orderId}(orderId=${order.orderId})}">View</a>
+                <a th:href="@{/...}">RETURN</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+<br>
+<div class="container">
+    <div style align="center">
+        <h6>Your reviews</h6>
+    </div>
+
     <table class="table table-striped">
         <thead>
         <tr>
             <th scope="col">Movie</th>
-            <th scope="col">Score </th>
+            <th scope="col">Score</th>
             <th scope="col">Comment</th>
         </tr>
         </thead>
@@ -50,6 +83,9 @@ Your reviews
 
 <!--dane uzytkowanika-->
 <div class="container">
+    <div style align="center">
+        <h6>Your data</h6>
+    </div>
     <table class="table table-striped">
         <thead>
         <tr>

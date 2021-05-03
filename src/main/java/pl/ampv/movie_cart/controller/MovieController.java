@@ -7,8 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import pl.ampv.movie_cart.service.MovieService;
-import pl.ampv.movie_cart.service.ReviewService;
-import pl.ampv.registration.service.UserService;
 
 @Slf4j
 @Controller
@@ -21,6 +19,8 @@ public class MovieController {
     @GetMapping("/movie/details/{movieId}")
     public String movieDetail(@PathVariable Long movieId, Model model) {
         model.addAttribute("movie", movieService.getById(movieId));
+        //if statement
+        model.addAttribute("reviews", movieService.getById(movieId).getReview());
         return "movie_detail";
     }
 

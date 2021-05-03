@@ -11,6 +11,7 @@ import pl.ampv.movie_cart.repository.OrderRepository;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -43,11 +44,11 @@ public class PriceCalcService {
         LocalDate treeMonths = orderDate.minusMonths(3);
         LocalDate oneYear = orderDate.minusYears(1);
 
-        if (premiereDate.isBefore(twoWeeks)) {
+        if (premiereDate.isAfter(twoWeeks)) {
             return PriceType.PREMIERE;
-        } else if (premiereDate.isAfter(twoWeeks) & premiereDate.isBefore(treeMonths)) {
+        } else if (premiereDate.isBefore(twoWeeks) && premiereDate.isAfter(treeMonths)) {
             return PriceType.NEWNESS;
-        } else if (premiereDate.isAfter(treeMonths) & premiereDate.isBefore(oneYear)) {
+        } else if (premiereDate.isBefore(treeMonths) && premiereDate.isAfter(oneYear)) {
             return PriceType.STANDARD;
         } else {
             return PriceType.CLASSIC;
@@ -55,4 +56,16 @@ public class PriceCalcService {
     }
 
 
+    public Double calculatePriceForOneDay(Long orderId) {
+        Order order = orderRepository.getOne(orderId);
+        LocalDate returnedDate = LocalDate.now().plusDays(1);
+
+        double totalPrice = 0.0;
+        int daysRented = (int) ChronoUnit.DAYS.between(order.getRentedDate(), returnedDate);
+        for (Copy c : order.getCopies()) {
+            totalPrice = Double.sum(calculateTotalPrice(c.getMovie(), daysRented), totalPrice);
+        }
+        order.setTotalPrice(totalPrice);
+        return totalPrice;
+    }
 }

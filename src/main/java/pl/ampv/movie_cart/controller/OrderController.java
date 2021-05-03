@@ -5,12 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import pl.ampv.movie_cart.dto.OrderDto;
 import pl.ampv.movie_cart.model.Copy;
 import pl.ampv.movie_cart.model.Order;
 import pl.ampv.movie_cart.model.OrderStatus;
@@ -21,7 +18,6 @@ import pl.ampv.movie_cart.usecase.exception.MovieDoesNotExistInCatalogue;
 import pl.ampv.registration.model.User;
 import pl.ampv.registration.service.UserService;
 
-import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -49,8 +45,7 @@ public class OrderController {
         order.setCopies(movieCopyCart);
         order.setStatus(OrderStatus.ORDERED);
 
-
-//ustalamy cene po zwrocie zamowenia
+//        set the total price after return
 //        Double calcTotalPrice = priceCalcService.calculateTotalPrice(order.getOrderId());
 //        order.setTotalPrice(calcTotalPrice);
 
@@ -65,7 +60,12 @@ public class OrderController {
 
     @GetMapping("/movie/order/{orderId}")
     public String createOrder(Model model, @PathVariable Long orderId){
-        model.addAttribute("order",  orderService.findByOrderId(orderId));
+        Order order = orderService.findByOrderId(orderId);
+        model.addAttribute("order", order);
+        // set the price for 1 day as a total price
+        Double calcPriceForOneDay = priceCalcService.calculatePriceForOneDay(order.getOrderId());
+        order.setTotalPrice(calcPriceForOneDay);
+        orderService.save(order);
         return "order_page_second";
     }
 
@@ -119,8 +119,16 @@ public class OrderController {
 //
     @GetMapping("/movie/order/accept")
     public String orderAccepted(){
-        return "account_page";
+
+        //TODO: zamknąć sesje koszyka
+
+        log.info("Success! You completed your order.");
+        return "redirect:/movie/catalogue";
     }
+
+
+
+
 
 
 }

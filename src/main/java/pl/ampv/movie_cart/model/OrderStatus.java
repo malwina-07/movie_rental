@@ -4,5 +4,5 @@ public enum OrderStatus {
     ORDERED,
     DELIVERED,
     RETURNED,
-    PAID_I_COMPLETED
+    PAID_AND_COMPLETED
 }

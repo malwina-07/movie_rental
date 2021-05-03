@@ -6,6 +6,7 @@ import pl.ampv.movie_cart.model.Order;
 import pl.ampv.movie_cart.repository.OrderRepository;
 import pl.ampv.movie_cart.service.OrderService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,7 +22,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> findByUserId(Long userId) {
-        return orderRepository.findByUserId(userId);
+        List<Order> userOrders = orderRepository.findByUserId(userId);
+        if(userOrders.isEmpty()){
+            return new ArrayList<>();
+        }
+        return userOrders;
     }
 
     @Override
