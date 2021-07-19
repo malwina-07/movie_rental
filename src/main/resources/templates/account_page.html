@@ -48,9 +48,8 @@
             <td>
                 <a th:href="@{/user/order/{orderId}(orderId=${order.orderId})}">View</a>
                     <form method="POST" th:action="@{/user/order/return/{orderId}(orderId=${order.orderId})}">
-                        <button type="submit" name="submit" value="value" class="btn btn-success">RETURN</button>
+                        <button type="submit" name="submit" value="value" class="btn btn-success" th:disabled="${order.status.name() != 'ORDERED'}">RETURN</button>
                     </form>
-
             </td>
         </tr>
         </tbody>
