@@ -63,8 +63,7 @@
         <!-- wyswietl dostepne kopie-->
         <!--    cena filmu-->
         <div>
-            <a th:href="@{/movie/cart/add/{movieId}(movieId=${movie.movieId})}" class="btn btn-outline-success"
-               onclick="return confirm('Do you want to add the move to cart?')">Buy</a>
+            <a th:href="@{/movie/cart/add/{movieId}(movieId=${movie.movieId})}" class="btn btn-outline-success">Add to cart</a>
 
             <a th:href="@{/movie/rate/{movieId}(movieId=${movie.movieId})}" class="btn btn-outline-success">Rate the
                 movie</a>

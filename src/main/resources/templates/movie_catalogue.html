@@ -67,8 +67,7 @@
                 <td th:text="${movie.genre}"></td>
                 <td>
                     <a th:href="@{/movie/details/{movieId}(movieId=${movie.movieId})}" class="btn btn-outline-success">Details</a>
-                    <a th:href="@{/movie/cart/add/{movieId}(movieId=${movie.movieId})}" class="btn btn-outline-success"
-                       onclick="return confirm('Do you want to add the move to cart?')">Buy</a>
+                    <a th:href="@{/movie/cart/add/{movieId}(movieId=${movie.movieId})}" class="btn btn-outline-success">Add to cart</a>
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
                         <a th:href="@{admin/movie/add_copy/{movieId}(movieId=${movie.movieId})}"
                            class="btn btn-outline-success">Add Copy</a></div>
