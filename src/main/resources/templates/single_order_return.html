@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Info</title>
+</head>
+<body>
+<h4>
+  We will charge money from you credit card.
+    Total price for rent from:
+    <div th:text="${returned.rentedDate}"></div> to: <div th:text="${returned.returnDate}"></div>
+    is: <div th:text="${(returned.totalPrice + ' Euro')}" > euro</div>
+  Your order has been return. </h4>
+<div>
+    <a th:href="@{/my_account}">OK</a>
+</div>
+</body>
+</html>

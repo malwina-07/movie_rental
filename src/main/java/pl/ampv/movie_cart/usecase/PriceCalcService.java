@@ -23,7 +23,13 @@ public class PriceCalcService {
         Order order = orderRepository.getOne(orderId);
 
         double totalPrice = 0.0;
+
         int daysRented = (int) ChronoUnit.DAYS.between(order.getReturnDate(), order.getRentedDate());
+
+        if (daysRented <= 0) {
+            daysRented = 1;
+        }
+
         for (Copy c : order.getCopies()) {
             totalPrice = Double.sum(calculateTotalPrice(c.getMovie(), daysRented), totalPrice);
         }

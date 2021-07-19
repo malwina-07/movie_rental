@@ -6,17 +6,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.ampv.movie_cart.model.Order;
+import pl.ampv.movie_cart.model.OrderStatus;
 import pl.ampv.movie_cart.service.OrderService;
 import pl.ampv.movie_cart.service.ReviewService;
 import pl.ampv.registration.model.User;
 import pl.ampv.registration.service.UserService;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 
 @Slf4j
 @Controller
@@ -61,18 +60,8 @@ public class AccountController {
         return "redirect:/my_account";
     }
 
-    @GetMapping("/user/order/{orderId}")
-    public String getUserSingleOrder(@PathVariable Long orderId, Model model) {
-
-        model.addAttribute("order", orderService.findByOrderId(orderId));
 
 
-        Order byOrderId = orderService.findByOrderId(orderId);
-        model.addAttribute("copies", byOrderId.getCopies());
-
-
-        return "single_order";
-    }
 
 
 }

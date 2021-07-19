@@ -2,12 +2,11 @@ package pl.ampv.movie_cart.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.ampv.movie_cart.model.Copy;
 import pl.ampv.movie_cart.model.Order;
 import pl.ampv.movie_cart.model.OrderStatus;
@@ -18,6 +17,7 @@ import pl.ampv.movie_cart.usecase.exception.MovieDoesNotExistInCatalogue;
 import pl.ampv.registration.model.User;
 import pl.ampv.registration.service.UserService;
 
+import java.net.http.HttpClient;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class OrderController {
         order.setRentedDate(LocalDate.now());
 
         List<Copy> movieCopyCart = createCopyOfMovieFromCart.listOfCopyCart();
-        for(Copy c : movieCopyCart){
+        for (Copy c : movieCopyCart) {
             c.setOrder(order);
         }
         order.setCopies(movieCopyCart);
@@ -55,11 +55,11 @@ public class OrderController {
 
         order = orderService.save(order);
 
-        return  "redirect:/movie/order/"+order.getOrderId();
+        return "redirect:/movie/order/" + order.getOrderId();
     }
 
     @GetMapping("/movie/order/{orderId}")
-    public String createOrder(Model model, @PathVariable Long orderId){
+    public String createOrder(Model model, @PathVariable Long orderId) {
         Order order = orderService.findByOrderId(orderId);
         model.addAttribute("order", order);
         // set the price for 1 day as a total price
@@ -69,10 +69,14 @@ public class OrderController {
         return "order_page_second";
     }
 
+    @GetMapping("/movie/order/accept")
+    public String orderAccepted() {
 
+        //TODO: zamknąć sesje koszyka
 
-
-
+        log.info("Success! You completed your order.");
+        return "redirect:/movie/catalogue";
+    }
 
 
 
@@ -117,18 +121,6 @@ public class OrderController {
 //        return "order_page_second";
 //    }
 //
-    @GetMapping("/movie/order/accept")
-    public String orderAccepted(){
-
-        //TODO: zamknąć sesje koszyka
-
-        log.info("Success! You completed your order.");
-        return "redirect:/movie/catalogue";
-    }
-
-
-
-
 
 
 }
