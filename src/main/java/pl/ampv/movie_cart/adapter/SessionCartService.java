@@ -17,6 +17,7 @@ public class SessionCartService implements CartService {
 
     private Map<Long, Integer> cartEntries = new HashMap<>();
 
+
     @Override
     public Map<Long, Integer> add(Long movieId) {
         if(cartEntries.containsKey(movieId)) {
@@ -32,6 +33,11 @@ public class SessionCartService implements CartService {
     @Override
     public Map<Long, Integer> getCartEntries() {
         return Collections.unmodifiableMap(cartEntries);
+    }
+
+    @Override
+    public void clear() {
+        cartEntries.clear();
     }
 
 }

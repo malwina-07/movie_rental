@@ -48,7 +48,7 @@
     </table>
 
     <form method="POST" th:action="@{/movie/order/}">
-        <button type="submit" name="submit" value="value" class="btn btn-success">Order</button>
+        <button type="submit" name="submit" value="value" class="btn btn-success" th:disabled="${cartEntries.isEmpty()}">Order</button>
     </form>
 </div>
 </body>

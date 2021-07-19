@@ -6,4 +6,6 @@ public interface CartService {
     Map<Long, Integer> add(Long movieId);
 
     Map<Long, Integer> getCartEntries();
+
+    void clear();
 }

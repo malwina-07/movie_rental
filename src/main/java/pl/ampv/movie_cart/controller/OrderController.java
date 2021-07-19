@@ -14,6 +14,7 @@ import pl.ampv.movie_cart.service.OrderService;
 import pl.ampv.movie_cart.usecase.CreateCopyOfMovieFromCart;
 import pl.ampv.movie_cart.usecase.PriceCalcService;
 import pl.ampv.movie_cart.usecase.exception.MovieDoesNotExistInCatalogue;
+import pl.ampv.movie_cart.usecase.port.CartService;
 import pl.ampv.registration.model.User;
 import pl.ampv.registration.service.UserService;
 
@@ -30,6 +31,7 @@ public class OrderController {
     private final PriceCalcService priceCalcService;
     private final UserService userService;
     private final OrderService orderService;
+    private final CartService cartService;
 
 
     @PostMapping("/movie/order/")
@@ -44,10 +46,6 @@ public class OrderController {
         }
         order.setCopies(movieCopyCart);
         order.setStatus(OrderStatus.ORDERED);
-
-//        set the total price after return
-//        Double calcTotalPrice = priceCalcService.calculateTotalPrice(order.getOrderId());
-//        order.setTotalPrice(calcTotalPrice);
 
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Long idLoggedUser = principal.getId();
@@ -71,13 +69,11 @@ public class OrderController {
 
     @GetMapping("/movie/order/accept")
     public String orderAccepted() {
-
-        //TODO: zamknąć sesje koszyka
+        cartService.clear();
 
         log.info("Success! You completed your order.");
         return "redirect:/movie/catalogue";
     }
-
 
 
 //    @PostMapping("/movie/order/data")
