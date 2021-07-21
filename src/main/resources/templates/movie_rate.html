@@ -46,14 +46,12 @@
                 <td>
                     <input type="number" th:field="*{score}" min="1" max="10">
                 </td>
-                <td th:if="${ #fields.hasErrors('score') }" th:errors="*{score}"></td>
+                <td th:if="${#fields.hasErrors('score') }" th:errors="*{score}"></td>
             </tr>
 
             <tr>
                 <td th:text="Comment"></td>
-                <td>
-                    <input type="text" th:field="*{comment}">
-                </td>
+                <td><input type="text" th:field="*{comment}"/></td>
             </tr>
             <tr>
                 <td>

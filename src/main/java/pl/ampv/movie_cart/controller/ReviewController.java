@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -42,10 +43,10 @@ public class ReviewController {
     }
 
     @PostMapping("/movie/rate/save")
-    public String saveRate(@Valid @ModelAttribute ReviewDto reviewDto, Errors errors) {
+    public String saveRate(@Valid @ModelAttribute("review") ReviewDto reviewDto, BindingResult bindingResult) {
 
-        if (errors.hasErrors()) {
-            log.error("Error occurred in front: " + errors.getFieldError());
+        if (bindingResult.hasErrors()) {
+//            log.error("Error occurred in front: " + bindingResult.getFieldError());
             return "movie_rate";
         }
 

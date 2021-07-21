@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import pl.ampv.registration.model.User;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
