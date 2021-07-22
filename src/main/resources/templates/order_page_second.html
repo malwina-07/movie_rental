@@ -29,7 +29,7 @@
             <td th:text="${order.user.lastName}"></td>
             <td th:text="${order.copies.size()}"></td>
             <td th:text="${order.getRentedDate()}"></td>
-            <td th:text="${order.totalPrice}"></td>
+            <td th:text="${(order.totalPrice + ' €')}"></td>
         </tr>
         </tbody>
         <a th:href="@{/movie/order/accept}" class="btn btn-success">Accept the order</a>

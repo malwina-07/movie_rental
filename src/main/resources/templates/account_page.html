@@ -43,7 +43,7 @@
             <td th:text="${order.orderId}"></td>
             <td th:text="${order.rentedDate}"></td>
             <td th:text="${order.copies.size()}"></td>
-            <td th:text="${order.totalPrice}"></td>
+            <td th:text="${(order.totalPrice + ' €')}"></td>
             <td th:text="${order.status.name()}"></td>
             <td>
                 <a th:href="@{/user/order/{orderId}(orderId=${order.orderId})}">View</a>
