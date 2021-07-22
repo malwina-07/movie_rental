@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 import pl.ampv.movie_cart.usecase.port.CartService;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 @Service
 @Scope(value = WebApplicationContext.SCOPE_SESSION,
@@ -20,12 +22,12 @@ public class SessionCartService implements CartService {
 
     @Override
     public Map<Long, Integer> add(Long movieId) {
-        if(cartEntries.containsKey(movieId)) {
-            cartEntries.replace(movieId, cartEntries.get(movieId) + 1);
-        }
-        else {
-            cartEntries.put(movieId, 1);
-        }
+        cartEntries.put(movieId, cartEntries.containsKey(movieId) ? cartEntries.get(movieId) + 1 : 1);
+//        if (cartEntries.containsKey(movieId)) {
+//            cartEntries.replace(movieId, cartEntries.get(movieId) + 1);
+//        } else {
+//            cartEntries.put(movieId, 1);
+//        }
 
         return getCartEntries();
     }
@@ -38,6 +40,18 @@ public class SessionCartService implements CartService {
     @Override
     public void clear() {
         cartEntries.clear();
+    }
+
+    @Override
+    public void removeById(Long movieId) {
+
+        if (cartEntries.containsKey(movieId)) {
+            if (cartEntries.get(movieId) > 1) {
+                cartEntries.replace(movieId, cartEntries.get(movieId) - 1);
+            } else {
+                cartEntries.remove(movieId, 1);
+            }
+        }
     }
 
 }
