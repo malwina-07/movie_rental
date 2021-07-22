@@ -48,4 +48,22 @@ public class CartController {
         return "cart";
     }
 
+    @GetMapping("/order/accept")
+    public String clearCart() {
+        cartService.clear();
+
+        log.info("Success! You completed your order.");
+        return "redirect:/movie/catalogue";
+    }
+
+
+
+    @GetMapping("/cart/remove/{movieId}")
+    public String removeItem(@PathVariable Long movieId){
+
+        cartService.removeById(movieId);
+
+        return "redirect:/movie/cart";
+    }
+
 }
