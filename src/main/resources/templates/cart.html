@@ -41,6 +41,9 @@
         <tr th:each="cartEntry : ${cartEntries}">
             <td scope="row" th:text="${cartEntry.key.title}"></td>
             <td th:text="${cartEntry.value}"></td>
+            <td>
+                <a th:href="@{/movie/cart/remove/{movieId}(movieId=${cartEntry.key.movieId})}" class="btn btn-outline-success">Remove</a>
+            </td>
         </tr>
         </tbody>
         <input type="hidden" th:field="${order.orderId}">
