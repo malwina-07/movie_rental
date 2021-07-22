@@ -23,6 +23,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Slf4j
+//@RequestMapping("/movie/order")
 @Controller
 @RequiredArgsConstructor
 public class OrderController {
@@ -31,8 +32,6 @@ public class OrderController {
     private final PriceCalcService priceCalcService;
     private final UserService userService;
     private final OrderService orderService;
-    private final CartService cartService;
-
 
     @PostMapping("/movie/order/")
     public String createOrder() throws MovieDoesNotExistInCatalogue {
@@ -67,56 +66,7 @@ public class OrderController {
         return "order_page_second";
     }
 
-    @GetMapping("/movie/order/accept")
-    public String orderAccepted() {
-        cartService.clear();
 
-        log.info("Success! You completed your order.");
-        return "redirect:/movie/catalogue";
-    }
-
-
-//    @PostMapping("/movie/order/data")
-//    public String fillOrderWithData(@Valid @ModelAttribute OrderDto orderDto, Errors errors) throws MovieDoesNotExistInCatalogue {
-//        if (errors.hasErrors()) {
-//            log.error("Error occurred in front: " + errors.getFieldError());
-//            return "order_page_first";
-//        }
-//        Order order = new Order();
-//
-//        order.setRentedDate(orderDto.getRentedDate());
-//        order.setReturnDate(orderDto.getReturnDate());
-//
-//        List<Copy> movieCopyCart = createCopyOfMovieFromCart.listOfCopyCart();
-//        order.setCopies(movieCopyCart);
-//
-//        Double calcTotalPrice = priceCalcService.calculateTotalPrice(order.getOrderId());
-//        order.setTotalPrice(calcTotalPrice);
-//
-//        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        Long idLoggedUser = principal.getId();
-//        order.setUser(userService.findById(idLoggedUser));
-//
-//        orderService.save(order);
-//        log.info("Your order has been successfully refilled");
-//
-//        return "order_page_second";
-//    }
-
-//    @GetMapping("/movie/order/{orderId}")
-//    public String showOrder(@PathVariable Long orderId, Model model) {
-//
-//
-//        Order order = orderService.findByOrderId(orderId);
-//
-//        Double calcTotalPrice = priceCalcService.calculateTotalPrice(order.getOrderId());
-//        order.setTotalPrice(calcTotalPrice);
-//
-//        model.addAttribute("order", order);
-//
-//        return "order_page_second";
-//    }
-//
 
 
 }

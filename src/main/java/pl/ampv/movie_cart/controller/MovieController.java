@@ -6,9 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import pl.ampv.movie_cart.service.MovieService;
 
 @Slf4j
+@RequestMapping("/movie")
 @Controller
 @RequiredArgsConstructor
 public class MovieController {
@@ -16,7 +18,7 @@ public class MovieController {
     private final MovieService movieService;
 
 
-    @GetMapping("/movie/details/{movieId}")
+    @GetMapping("/details/{movieId}")
     public String movieDetail(@PathVariable Long movieId, Model model) {
         model.addAttribute("movie", movieService.getById(movieId));
         //if statement
@@ -24,7 +26,7 @@ public class MovieController {
         return "movie_detail";
     }
 
-    @GetMapping("/movie/catalogue")
+    @GetMapping("/catalogue")
     public String findByKeyword(String keyword, Model model) {
         if (keyword != null) {
             model.addAttribute("movies", movieService.findByKeyword(keyword));
@@ -34,25 +36,25 @@ public class MovieController {
         return "movie_catalogue";
     }
 
-    @GetMapping("/movie/sortBy/titleAsc")
+    @GetMapping("/sortBy/titleAsc")
     public String sortMovieByTitle(Model model) {
         model.addAttribute("movies", movieService.getAllSortedByTitle());
         return "movie_catalogue";
     }
 
-    @GetMapping("/movie/sortBy/titleDesc")
+    @GetMapping("/sortBy/titleDesc")
     public String sortMovieByTitleDsc(Model model) {
         model.addAttribute("movies", movieService.getAllSortedByTitleDesc());
         return "movie_catalogue";
     }
 
-    @GetMapping("/movie/sortBy/score")
+    @GetMapping("/sortBy/score")
     public String sortMovieByAvgScore(Model model) {
         model.addAttribute("movies", movieService.getAllSortedByAvgDesc());
         return "movie_catalogue";
     }
 
-    @GetMapping("/movie/sortBy/premiere")
+    @GetMapping("/sortBy/premiere")
     public String sortMovieByPremiere(Model model) {
         model.addAttribute("movies", movieService.getAllSortedByPremiere());
         return "movie_catalogue";
