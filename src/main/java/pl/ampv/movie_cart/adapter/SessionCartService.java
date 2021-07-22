@@ -23,12 +23,6 @@ public class SessionCartService implements CartService {
     @Override
     public Map<Long, Integer> add(Long movieId) {
         cartEntries.put(movieId, cartEntries.containsKey(movieId) ? cartEntries.get(movieId) + 1 : 1);
-//        if (cartEntries.containsKey(movieId)) {
-//            cartEntries.replace(movieId, cartEntries.get(movieId) + 1);
-//        } else {
-//            cartEntries.put(movieId, 1);
-//        }
-
         return getCartEntries();
     }
 
@@ -44,13 +38,10 @@ public class SessionCartService implements CartService {
 
     @Override
     public void removeById(Long movieId) {
-
-        if (cartEntries.containsKey(movieId)) {
-            if (cartEntries.get(movieId) > 1) {
-                cartEntries.replace(movieId, cartEntries.get(movieId) - 1);
-            } else {
-                cartEntries.remove(movieId, 1);
-            }
+        if (cartEntries.get(movieId) > 1) {
+            cartEntries.computeIfPresent(movieId, (kay, val) -> val - 1);
+        } else {
+            cartEntries.remove(movieId, 1);
         }
     }
 
