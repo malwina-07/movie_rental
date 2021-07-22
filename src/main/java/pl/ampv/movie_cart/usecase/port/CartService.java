@@ -8,4 +8,6 @@ public interface CartService {
     Map<Long, Integer> getCartEntries();
 
     void clear();
+
+    void removeById(Long movieId);
 }
